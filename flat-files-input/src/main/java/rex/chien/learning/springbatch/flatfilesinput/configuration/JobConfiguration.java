@@ -6,12 +6,15 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import rex.chien.learning.springbatch.flatfilesinput.domain.Customer;
 import rex.chien.learning.springbatch.flatfilesinput.domain.CustomerFieldSetMapper;
 
@@ -26,6 +29,19 @@ public class JobConfiguration {
 
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
+
+//    @Value("classpath*:/data/customer*.csv")
+//    private Resource[] inputFiles;
+//
+//	@Bean
+//	public MultiResourceItemReader<Customer> multiResourceItemReader() {
+//		MultiResourceItemReader<Customer> reader = new MultiResourceItemReader<>();
+//
+//		reader.setDelegate(customerItemReader());
+//		reader.setResources(inputFiles);
+//
+//		return reader;
+//	}
 
 	@Bean
 	public FlatFileItemReader<Customer> customerItemReader() {
